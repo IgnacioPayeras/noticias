@@ -1,0 +1,67 @@
+----------------------------------------------------"CREATE SCHEMA"----------------------------------------------------
+CREATE SCHEMA `news` ;
+----------------------------------------------------"CREATE TABLES"----------------------------------------------------
+create table Journalist (
+	id int auto_increment primary key,
+    name varchar(100)
+);
+
+create table News (
+	id int auto_increment primary key,
+    title varchar(200),
+    datetime datetime,
+    video_link longtext,
+    video_title longtext,
+	introduction longtext,
+    conclusion longtext,
+    id_journalist int,
+    foreign key (id_journalist) references Journalist(id)
+);
+
+create table Part (
+	id int auto_increment primary key,
+    title varchar(100),
+    content longtext,
+    image_link longtext,
+    image_description longtext
+);
+
+create table News_part (
+	id_news int,
+    id_part int,
+    foreign key (id_news) references News(id),
+    foreign key (id_part) references Part(id)
+);
+
+
+----------------------------------------------------"INSERT VALUES"----------------------------------------------------
+
+## JOURNALIST
+insert into Journalist (name) values ('Catalina Maldonado');
+insert into Journalist (name) values ('Matías González Olguín');
+insert into Journalist (name) values ('Patricio Vargas');
+
+## NEWS
+insert into News (title, datetime, video_link, video_title, introduction, conclusion, id_journalist) values ('Ya cayeron las primeras gotitas: Estos son los días en que lloverá en Santiago', '2024-04-12 07:41:00', 'https://www.youtube.com/embed/Z0lDoaVQzSE', 'Megatiempo | Se anuncian precipitaciones para el centro norte del país - Jueves 11 de abril','Una fría mañana con apenas 12°C se registra este viernes en la Región Metropolitana. Incluso, ya han caído leves gotitas en algunos sectores más cercanos a la Cordillera de Los Andes. El panorama seguirá así los próximos días, a la espera de las precipitaciones que se han pronosticado para la zona norte y central del país. El periodista especializado en meteorología de Meganoticias, Alejandro Sepúlveda, abordó las lluvias y precisó cuales serán los días en que se presentará el fenómeno en la capital.', 'Mañana sábado, en tanto, "amanecería con cielo parcial, pero en la tarde se activarían los chubascos. Lo más constante en Santiago será desde la noche del sábado a la madrugada del domingo, por la probabilidad de tormentas eléctricas en la cordillera", dijo el periodista. "Durante el domingo tendremos quiebres", señaló, mencionando que "tendremos algo de solcito, pero en la tarde vuelve la probabilidad de chubascos y así hasta las primeras horas del lunes".', 1);
+
+insert into News (title, datetime, introduction, conclusion, id_journalist) values ('Se inscribió en plataforma para que no lo llamen y lo contactaron igual: Empresa tendrá que recompensarlo', '2024-04-12 10:40:00', 'Una famosa empresa de televisión digital deberá pagarle una indemnización a un cliente que fue víctima de hostigamientos a través de correos electrónicos, llamadas telefónicas e, incluso, redes sociales.', 'Con esto, la demandada fue condenada a pagar una doble indemnización: 150 mil pesos argentinos (poco más de $165 mil chilenos) por concepto de daño moral y 250.000 pesos argentinos (unos $276 mil) por daño punitivo.', 2);
+
+insert into News (title, datetime, introduction, conclusion, id_journalist) values ('Coquimbo vence a Sportivo Luqueño como local por Copa Sudamericana y queda segundo en su grupo', '2024-04-11 22:30:00', 'Ayudado por el ferviente apoyo de los hinchas presentes en el Estadio Francisco Sánchez Rumoroso, Coquimbo Unido venció por 1-0 a Sportivo Luqueño y enmendó el rumbo escalando al segundo puesto del grupo H de Copa Sudamericana.', 'Los pupilos de Julio César Cáceres intentaron por todos los medios conseguir la igualdad, pero no fueron capaces de penetrar en la ordenada zaga del equipo filibustero, que con sus primeros tres puntos se instaló en el segundo lugar de su zona gracias a su mejor diferencia de gol respecto de RB Bragantino. El líder es Racing Club con seis unidades.', 3);
+
+## PART
+insert into Part (title, content, image_link, image_description) values ('¿Qué dijo Alejandro Sepúlveda por las lluvias en Santiago?', 'Sobre este viernes, indicó que habrá "cielo cubierto" junto a "estas gotitas que caerán durante la mañana en sectores del oriente del Gran Santiago, como Lo Barnechea, Las Condes, La Reina, Peñalolén, Puente Alto, San José de Maipo, donde pueden caer algunas precipitaciones"paraguayo, hubo una situación que pudo cambiar el trámite del cotejo. Es que en los descuentos, el portero forastero salió de su zona y cortó con el brazo un avance pirata. Aunque el árbitro le mostró la cartulina roja, el VAR lo advirtió de un offside del delantero rival, invalidando la expulsión.', 'https://images2-mega.cdn.mdstrm.com/meganoticias/2024/04/12/444863_1_66191e7a5a460.jpg', 'Precipitaciones');
+
+insert into Part (title, content, image_link, image_description) values ('¿Cómo fueron los hechos?', 'La historia se remonta a fines de 2021, cuando el cliente —de profesión abogado— comenzó a recibir avisos de una deuda impaga en su email. Lo más insólito es que los correos estaban a nombre de otra persona, no del suyo; por lo tanto, había una equivocación de la empresa que no era subsanada.', 'https://images2-mega.cdn.mdstrm.com/meganoticias/2024/04/12/hostigamientos-cliente-argentina_444873_4_66193d47767e9.jpg', 'Martillo');
+
+insert into Part (title, content) values ('Los argumentos de la empresa demandada', 'Por su parte, según se lee en el fallo del mencionado juzgado, la compañía "negó categóricamente cada uno de los hechos expuestos y refirió que el demandante no aporta más prueba que sus dichos, que ofreció prueba pericial informática, que argumentó improcedencia del daño moral y punitivo", pidiendo que se rechace el recurso en su contra.');
+
+insert into Part (title, content, image_link, image_description) values ('Primer tiempo', "Los dirigidos de Fernando Díaz, de buen momento en el Campeonato Nacional, comenzaron el pleito con el pie derecho, imponiendo sus condiciones y abriendo la cuenta en el minuto quince, instante en que Benjamín Chandía profundizó para Dylan Glaby, quien dentro del área mandó un centro bajo que llegó a conectar Andrés Chávez, poniendo el 1-0 (15').", 'https://images2-mega.cdn.mdstrm.com/meganoticias/2024/04/11/444850_1_66189e063e1b9.jpg', 'CoquimboUnido');
+
+insert into Part (title, content) values ('Segundo medio', "El combinado guaraní adelantó las líneas para presionar en la salida al Barbón, que de todas formas no pasó zozobras con los embates de su adversario e incluso, quedó muy cerca del segundo gol en un centro de Barrera que alcanzó a cortar el guardameta antes de que apareciera Chávez para marcar (65').");
+
+## NEWS_PART
+insert into News_part (id_news, id_part) values (1,1);
+insert into News_part (id_news, id_part) values (2,2);
+insert into News_part (id_news, id_part) values (2,3);
+insert into News_part (id_news, id_part) values (3,4);
+insert into News_part (id_news, id_part) values (3,5);
