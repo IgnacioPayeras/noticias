@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New news</title>
+    <link rel="stylesheet" href="../styles/create_news.css">
+  </head>
+  <body>
+    <header>
+      <h1>Create News</h1>
+      <button onclick="createBodyPart()">New Body Part</button>
+      <a href="/">Back</a>
+    </header>
+    <main>
+      <form action="create_news.php" method="post">
+        <input style="display:none" id="body-counter" name="counter" value="1" type="number" />
+        <div class="fieldset-container">
+          <fieldset>
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter a title"
+            />
+          </fieldset>
+          <fieldset>
+            <label for="journalist">Journalist</label>
+            <select name="journalist" id="journalist">
+              <option value="" selected hidden disabled>Select a journalist</option>
+              {% for journalist in journalistList %}
+              <option value={{ journalist.id }}>{{ journalist.name }}</option>
+              {% endfor %}
+            </select>
+          </fieldset>
+          <fieldset>
+            <label for="video-link">Video link</label>
+            <input
+              type="text"
+              id="video-link"
+              name="video-link"
+              placeholder="Enter a video link"
+            />
+          </fieldset>
+          <fieldset>
+            <label for="video-title">Video title</label>
+            <input
+              type="text"
+              id="video-title"
+              name="video-title"
+              placeholder="Enter a video title"
+            />
+          </fieldset>
+          <fieldset>
+            <label for="introduction">Introduction</label>
+            <input
+              type="text"
+              id="introduction"
+              name="introduction"
+              placeholder="Enter a introduction"
+            /> 
+          </fieldset>
+          <div class="body-part-container">
+            <h2>Body 1</h2>
+            <fieldset>
+              <label for="title-body-1">Title body 1</label>
+              <input
+                type="text"
+                id="title-body-1"
+                name="title-body-1"
+                placeholder="Enter a title first body"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="body-1">Body 1</label>
+              <input
+                type="text"
+                id="body-1"
+                name="body-1"
+                placeholder="Enter a first body"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="image-link-1">Image link 1</label>
+              <input
+                type="text"
+                id="image-link-1"
+                name="image-link-1"
+                placeholder="Enter a image link"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="image-alt-1">Image description 1</label>
+              <input
+                type="text"
+                id="image-alt-1"
+                name="image-alt-1"
+                placeholder="Enter a image-description"
+              />
+            </fieldset>
+          </div>
+          <fieldset id="conclusion-fieldset">
+            <label for="">Conclusion</label>
+            <input
+              type="text"
+              id="conclusion"
+              name="conclusion"
+              placeholder="Enter a conclusion"
+            />
+          </fieldset>
+        </div>
+        <button type="submit" onclick="setCounter()">Create</button>
+      </form>
+    </main>
+  </body>
+  <script>
+    var counter = 1;
+
+    function createBodyPart() {
+      counter += 1;
+      var conclusionFieldset = document.getElementById("conclusion-fieldset");
+      var bodyPartContainer = document.createElement("div");
+      bodyPartContainer.classList.add("body-part-container");
+
+      var html = `
+        <h2>Body ${counter}</h2>
+        <fieldset>
+            <label for="title-body-${counter}">Title body ${counter}</label>
+            <input type="text" id="title-body-${counter}" name="title-body-${counter}" placeholder="Enter a title body ${counter}">
+        </fieldset>
+        <fieldset>
+            <label for="body-${counter}">Body ${counter}</label>
+            <input type="text" id="body-${counter}" name="body-${counter}" placeholder="Enter a body ${counter}">
+        </fieldset>
+        <fieldset>
+            <label for="image-link-${counter}">Image link ${counter}</label>
+            <input type="text" id="image-link-${counter}" name="image-link-${counter}" placeholder="Enter a image link ${counter}">
+        </fieldset>
+        <fieldset>
+            <label for="image-alt-${counter}">Image description ${counter}</label>
+            <input type="text" id="image-alt-${counter}" name="image-alt-${counter}" placeholder="Enter a image description ${counter}">
+        </fieldset>`;
+
+        bodyPartContainer.innerHTML = html;
+        conclusionFieldset.parentNode.insertBefore(bodyPartContainer, conclusionFieldset);
+        var inputCounter = document.getElementById("body-counter");
+        inputCounter.value = counter;
+    }
+  </script>
+</html>

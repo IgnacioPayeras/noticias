@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="src/styles/home.css" />
+  </head>
+  <body>
+    <header>
+      <img
+        class="logo-mg trnstn"
+        src="https://static-meganoticias.cdn.mdstrm.com/_common/images/logo-meganoticias.svg?=20190705"
+        alt="Mega Noticias"
+        widht="400"
+        height="76"
+      />
+      <a href="src/controllers/render_create_news.php">Add New</a>
+    </header>
+    <main>
+      {% for news in newsList %}
+      <article>
+        <h1>{{ news.title }}</h1>
+        <h4>Por {{ news.name }}</h4>
+        <span>{{ news.datetime | date("d M Y - H:i \\h\\r\\s.") }}</span>
+        {% if news.video_link %}
+        <iframe width="1280" height="720" src={{ news.video_link }} title={{ news.video_title }} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        {% endif %}
+        <div>
+          <h2>¿Qué pasó?</h2>
+          <p>{{ news.introduction }}</p>
+        </div>
+        {% set titles = news.body_titles|split('\n') %} {% set contents =
+        news.body_contents|split('\n') %} {% set links =
+        news.body_image_link|split('\n') %} {% set descriptions =
+        news.body_image_description|split('\n') %} {% for index in
+        0..titles|length - 1 %}
+        <div>
+          <h2>{{ titles[index] }}</h2>
+          <p>{{ contents[index] }}</p>
+        </div>
+        {% if links[index] %}
+        <div class="image-container">
+          <img src={{ links[index] }} alt={{ descriptions[index] }} />
+          <span class="image-foot">Imagen Referencial</span>
+        </div>
+        {% endif %} {% endfor %}
+
+        <p>{{ news.conclusion }}</p>
+      </article>
+      {% endfor %}
+    </main>
+  </body>
+</html>

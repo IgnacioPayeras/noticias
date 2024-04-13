@@ -1,0 +1,90 @@
+body {
+  padding: 0 10rem;
+  background-color: #F8F9FA;
+  font-family: 'Roboto', sans-serif;
+}
+
+form {
+  background-color: white;
+  padding: 2rem 5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3em;
+  line-height: 1.2em;
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 2em;
+  color: #24AF8E;
+}
+
+h4 {
+  font-weight: 700;
+  font-size: 1em;
+  width: 100%;
+}
+
+span {
+  font-size: 1em;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.5em;
+  line-height: 1.6em;
+}
+
+button, a {
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+button {
+  background-color: #24AF8E;
+}
+
+a {
+  background-color: #E30423;
+  text-decoration: none;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.fieldset-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #8C8F94;
+  border-radius: 5px;
+}
+
+input, select {
+  padding: .8rem 1rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.body-part-container {
+  border: 2px solid #24AF8E;
+  padding: .5em 2em;
+  border-radius: 5px;
+}
